@@ -1,0 +1,471 @@
+fileFormatVersion: 2
+guid: b418e9fdae7fb1d4e9fe02efaf7a2d72
+ScriptedImporter:
+  internalIDToNameTable:
+  - first:
+      213: 602114834576318534
+    second: Cave Sprites_0
+  - first:
+      213: 5039298639034994338
+    second: Cave Sprites_1
+  - first:
+      213: 8994093303390107540
+    second: Cave Sprites_2
+  - first:
+      213: 4497713249274050856
+    second: Cave Sprites_3
+  - first:
+      213: 7171752634234617210
+    second: Cave Sprites_4
+  - first:
+      213: -210227239619572805
+    second: Cave Sprites_5
+  - first:
+      213: -8430194604189597048
+    second: Cave Sprites_6
+  - first:
+      213: -1547122590580327454
+    second: Cave Sprites_7
+  - first:
+      213: -8894734706374720846
+    second: Cave Sprites_8
+  - first:
+      213: -1886524802536292365
+    second: Cave Sprites_9
+  - first:
+      213: 2158765196757748813
+    second: Cave Sprites_10
+  - first:
+      213: -45276334960702996
+    second: Cave Sprites_11
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 1
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    isReadable: 0
+    streamingMipmaps: 1
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  spriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 0, y: 0}
+  mosaicSpriteImportData: []
+  rigSpriteImportData:
+  - name: Cave Sprites_0
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 3
+      y: 1865
+      width: 60
+      height: 50
+    spriteID: 6402aec70442b5800800000000000000
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 3, y: 1865}
+  - name: Cave Sprites_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 197
+      y: 1763
+      width: 374
+      height: 194
+    spriteID: 2ae4ac0b96f2fe540800000000000000
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 197, y: 1763}
+  - name: Cave Sprites_2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 13
+      y: 1773
+      width: 162
+      height: 64
+    spriteID: 4977949e43071dc70800000000000000
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 13, y: 1773}
+  - name: Cave Sprites_3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1251
+      y: 1313
+      width: 272
+      height: 478
+    spriteID: 8293c8cce561b6e30800000000000000
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1251, y: 1313}
+  - name: Cave Sprites_4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1310
+      width: 1024
+      height: 446
+    spriteID: a7db684f50f278360800000000000000
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 1310}
+  - name: Cave Sprites_5
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1035
+      y: 1319
+      width: 90
+      height: 230
+    spriteID: bbb4d5c707f151df0800000000000000
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1035, y: 1319}
+  - name: Cave Sprites_6
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1629
+      y: 1309
+      width: 96
+      height: 232
+    spriteID: 8824ddd2caee10b80800000000000000
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1629, y: 1309}
+  - name: Cave Sprites_7
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1801
+      y: 1317
+      width: 52
+      height: 176
+    spriteID: 2eb3a7c6334878ae0800000000000000
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1801, y: 1317}
+  - name: Cave Sprites_8
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1
+      y: 1
+      width: 1988
+      height: 1304
+    spriteID: 2b2423f29ed8f8480800000000000000
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1, y: 1}
+  - name: Cave Sprites_9
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1993
+      y: 923
+      width: 2052
+      height: 364
+    spriteID: 3ff3cd4ffa7b1d5e0800000000000000
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1993, y: 923}
+  - name: Cave Sprites_10
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1993
+      y: 493
+      width: 2052
+      height: 424
+    spriteID: d4cc832428975fd10800000000000000
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1993, y: 493}
+  - name: Cave Sprites_11
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1993
+      y: 1
+      width: 2052
+      height: 488
+    spriteID: ce98fe9c9652f5ff0800000000000000
+    internalID: 0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 1993, y: 1}
+  platformSettings: []
+  mosaicLayers: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  importedTextureWidth: 2048
+  importedTextureHeight: 1024
+  documentSize: {x: 2048, y: 1334}
+  paperDollMode: 0
+  keepDupilcateSpriteName: 0
+  spriteCategoryList:
+    categories: []
+  textureActualWidth: 4096
+  textureActualHeight: 2048
+  spritePackingTag: 
+  resliceFromLayer: 0
+  characterMode: 1
+  mosaicPSDLayers: []
+  rigPSDLayers:
+  - name: Foreground
+    spriteName: Foreground
+    isGroup: 0
+    parentIndex: -1
+    spriteID: aedf932f718061c45b4be7ca4d83d057
+    layerID: 0
+    mosaicPosition: {x: 4, y: 1311}
+  - name: Rocks
+    spriteName: Rocks
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 483ad3c81a11c5a448a05c1afe3e7e6f
+    layerID: 1151510412
+    mosaicPosition: {x: 4, y: 1765}
+  - name: Seaweed
+    spriteName: Seaweed
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 6c41f93c30ad4ce4395c3f72e5865fc6
+    layerID: 119210992
+    mosaicPosition: {x: 1036, y: 1311}
+  - name: Top
+    spriteName: Top
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 3b56144b454f1a94d900560e621c7b27
+    layerID: 1502599955
+    mosaicPosition: {x: 1995, y: 924}
+  - name: Bottom
+    spriteName: Bottom
+    isGroup: 0
+    parentIndex: -1
+    spriteID: c4e0e249068743e4fbcc8f60be4e82d6
+    layerID: 70940219
+    mosaicPosition: {x: 1995, y: 495}
+  - name: Bottom behind
+    spriteName: Bottom behind
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 031eb34e3db0602439ae33fd46e04715
+    layerID: 1021452583
+    mosaicPosition: {x: 1995, y: 4}
+  - name: Background gradient
+    spriteName: Background gradient
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 741a0c86c8fb4594b893237169ab9584
+    layerID: 142782982
+    mosaicPosition: {x: 4, y: 4}
+  characterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+  generateGOHierarchy: 0
+  textureAssetName: Cave Sprites Texture
+  prefabAssetName: Cave Sprites Prefab
+  spriteLibAssetName: Cave Sprites Sprite Lib
+  secondarySpriteTextures: []
