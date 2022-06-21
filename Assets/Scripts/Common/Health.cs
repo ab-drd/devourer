@@ -14,16 +14,21 @@ public class Health : MonoBehaviour
     [Header("Invulnerability")]
     [SerializeField] private float invulnerabilityPeriod;
 
+    [Header("Death")]
+    [SerializeField] private float deathShakePeriod;
+
     [Header("UI Manager")]
     [SerializeField] private UIManager uiManager;
 
     private float currentHealth;
+    public float healthAtLastCheckpoint;
     private bool invulnerable;
 
     private Animator anim;
     private void Awake()
     {
         currentHealth = maximumHealth;
+        healthAtLastCheckpoint = maximumHealth;
         anim = forms[1].GetComponentInChildren<Animator>();
     }
 
@@ -53,7 +58,6 @@ public class Health : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log("Dead!");
         if (forms[0].activeInHierarchy)
         {
             GetComponentInChildren<SphereMovement>().enabled = false;
@@ -67,15 +71,18 @@ public class Health : MonoBehaviour
             GetComponentInChildren<PolygonCollider2D>().enabled = false;
         }
 
+        StartCoroutine(cameraToShake.CameraShake(deathShakePeriod, 2 * shakeMagnitude, 1.001f));
         StartCoroutine(uiManager.ActivateDeathScreen());
+
         GetComponentInChildren<Rigidbody2D>().Sleep();
+        anim.enabled = false;
         GetComponent<Transformation>().enabled = false;
     }
 
     public void Hurt()
     {
         Debug.Log("Hurt!");
-        StartCoroutine(cameraToShake.CameraShake(invulnerabilityPeriod, shakeMagnitude));
+        StartCoroutine(cameraToShake.CameraShake(invulnerabilityPeriod / 4, shakeMagnitude, 1f));
         StartCoroutine(uiManager.HurtOverlayFade(invulnerabilityPeriod));
         StartCoroutine(Invulnerability());
     }
@@ -90,5 +97,45 @@ public class Health : MonoBehaviour
         yield return new WaitForSeconds(invulnerabilityPeriod);
         invulnerable = false;
         yield return 0;
+    }
+
+    public void FreezeMovement()
+    {
+        foreach (GameObject form in forms)
+        {
+            form.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            form.GetComponent<Rigidbody2D>().angularVelocity = 0f;
+        }
+    }
+
+    public void UpdateCheckpointHealth()
+    {
+        healthAtLastCheckpoint = currentHealth;
+    }
+
+    public void SetCheckpointHealth()
+    {
+        currentHealth = healthAtLastCheckpoint;
+        uiManager.SetHealthValue(currentHealth / maximumHealth);
+    }
+
+    public void RespawnActivators()
+    {
+        if (forms[0].activeInHierarchy)
+        {
+            GetComponentInChildren<SphereMovement>().enabled = true;
+            GetComponentInChildren<CircleCollider2D>().enabled = true;
+        }
+
+        if (forms[1].activeInHierarchy)
+        {
+            anim.SetBool("isDead", false);
+            GetComponentInChildren<AnglerfishMovement>().enabled = true;
+            GetComponentInChildren<PolygonCollider2D>().enabled = true;
+        }
+
+        GetComponentInChildren<Rigidbody2D>().WakeUp();
+        anim.enabled = true;
+        GetComponent<Transformation>().enabled = true;
     }
 }

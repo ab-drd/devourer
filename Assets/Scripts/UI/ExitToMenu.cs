@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ExitToMenu : MonoBehaviour
 {
     public void ExitOnClick()
     {
-        Debug.Log("clicked exit");
+        Time.timeScale = 1f;
+        Cursor.visible = true;
+        SceneManager.LoadScene(0);
     }
 }

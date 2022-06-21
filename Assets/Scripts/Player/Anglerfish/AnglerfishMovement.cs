@@ -26,6 +26,9 @@ public class AnglerfishMovement : MonoBehaviour
 
     private Animator anim;
     private Rigidbody2D rb;
+    private UIManager uiManager;
+
+    private float originalTopSpeed;
 
     void Awake()
     {
@@ -33,6 +36,8 @@ public class AnglerfishMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.drag = drag;
         controls = new Controls();
+        uiManager = GetComponentInParent<Transformation>().uiManager;
+        originalTopSpeed = topSpeed;
     }
     private void Start()
     {
@@ -51,6 +56,7 @@ public class AnglerfishMovement : MonoBehaviour
 
     private void OnDisable()
     {
+        //BurstFailsafe();
         movement.Disable();
     }
 
@@ -62,6 +68,7 @@ public class AnglerfishMovement : MonoBehaviour
             isSwimming = false;
         
         anim.SetBool("isSwimming", isSwimming);
+        uiManager.SetBurstValue(dashTimer / dashCooldown);
     }
 
     void FixedUpdate()
@@ -145,14 +152,14 @@ public class AnglerfishMovement : MonoBehaviour
     IEnumerator DashDuration()
     {
         isDashing = true;
-        anim.SetTrigger("burst");
+        anim.SetBool("dashing", isDashing);
         topSpeed *= dashMultiplier;
         swimForce *= dashMultiplier;
         yield return new WaitForSeconds(dashDuration);
-        anim.SetTrigger("burst");
         topSpeed /= dashMultiplier;
         swimForce /= dashMultiplier;
         isDashing = false;
+        anim.SetBool("dashing", isDashing);
         yield return null;
     }
 }

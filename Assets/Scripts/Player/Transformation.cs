@@ -7,7 +7,7 @@ public class Transformation : MonoBehaviour
 {
     [SerializeField] private GameObject[] forms;
     [SerializeField] private CameraFollow cam;
-    [SerializeField] private UIManager uiManager;
+    [SerializeField] public UIManager uiManager;
     [SerializeField] private float transformCooldown;
     public int unlockedFormCount;
 
@@ -18,7 +18,6 @@ public class Transformation : MonoBehaviour
     {
         transformTimer = Mathf.Infinity;
         controls = new Controls();
-        unlockedFormCount = 1;
         uiManager.SetTransformationIconHolderSize();
     }
 
@@ -26,6 +25,8 @@ public class Transformation : MonoBehaviour
     {
         controls.Player.Transformation.performed += TransformActive;
         controls.Player.Transformation.Enable();
+
+        FindActiveForm();
     }
 
     private void OnDisable()
@@ -38,7 +39,23 @@ public class Transformation : MonoBehaviour
         if (forms.Length == 0) return;
         
         transformTimer += Time.deltaTime;
-        uiManager.SetTransformationCooldownScale(transformTimer / transformCooldown);
+        if (transformTimer <= transformCooldown + 0.1f)
+            uiManager.SetTransformationCooldownScale(transformTimer / transformCooldown);
+    }
+
+    private void FindActiveForm()
+    {
+        for (int i = 0; i < unlockedFormCount; i++)
+        {
+            if (forms[i].activeInHierarchy)
+            {
+                if (forms[i].GetComponent<AnglerfishMovement>())
+                    uiManager.ActivateBurstBar();
+                else
+                    uiManager.DeactivateBurstBar();
+                break;
+            }
+        }
     }
 
     private void TransformActive(InputAction.CallbackContext obj)
@@ -53,6 +70,10 @@ public class Transformation : MonoBehaviour
             {
                 var tempVelocity = forms[i].GetComponent<Rigidbody2D>().velocity;
                 var tempPos = forms[i].transform.position;
+
+                if (forms[i].GetComponent<AnglerfishMovement>())
+                    uiManager.DeactivateBurstBar();
+
                 forms[i].SetActive(false);
 
                 var index = i + 1;
@@ -65,6 +86,8 @@ public class Transformation : MonoBehaviour
                 
                 cam.ChangeFollowTarget(index);
                 uiManager.ChangeActiveForm(index);
+                if (forms[index].GetComponent<AnglerfishMovement>())
+                    uiManager.ActivateBurstBar();
 
                 break;
             }
@@ -76,5 +99,13 @@ public class Transformation : MonoBehaviour
         unlockedFormCount = _forms;
 
         uiManager.RefreshTransformationIcons();
+    }
+
+    public void ResetFormPositions()
+    {
+        for (var i = 0; i < forms.Length; i++)
+        {
+            forms[i].transform.localPosition = new Vector3(0, 0, 0);
+        }
     }
 }

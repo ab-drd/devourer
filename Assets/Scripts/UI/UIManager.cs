@@ -30,7 +30,12 @@ public class UIManager : MonoBehaviour
 
     [Header ("Death")]
     [SerializeField] private float deathWaitPeriod;
-    [SerializeField] private GameObject deathOverlay;
+    [SerializeField] public GameObject deathOverlay;
+    [SerializeField] private float deathAlpha;
+
+    [Header("Burst")]
+    [SerializeField] private GameObject burstBar;
+    [SerializeField] private GameObject burstBarHolder;
 
     private int active;
     private Image transformationCooldownImage;
@@ -39,6 +44,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
+        Cursor.visible = false;
         transformationCooldownImage = transformationCooldownBar.GetComponentInChildren<Image>();
         SetImages();
         deathOverlay.SetActive(false);
@@ -110,6 +116,21 @@ public class UIManager : MonoBehaviour
         healthBar.transform.localScale = new Vector3(Mathf.Clamp(scale, 0, 1), 1, 1);
     }
 
+    public void SetBurstValue(float scale)
+    {
+        burstBar.transform.localScale = new Vector3(1, Mathf.Clamp(scale, 0, 1), 1);
+    }
+
+    public void DeactivateBurstBar()
+    {
+        burstBarHolder.SetActive(false);
+    }
+
+    public void ActivateBurstBar()
+    {
+        burstBarHolder.SetActive(true);
+    }
+
     public IEnumerator HurtOverlayFade(float duration)
     {
         hurtOverlay.color = new Color(hurtOverlay.color.r, hurtOverlay.color.g, hurtOverlay.color.b, Mathf.Clamp(hurtAlphaStart, 0, 1));
@@ -125,6 +146,11 @@ public class UIManager : MonoBehaviour
 
         hurtOverlay.color = new Color(hurtOverlay.color.r, hurtOverlay.color.g, hurtOverlay.color.b, 0f);
         yield return 0;
+    }
+
+    public void HurtOverlayDeactivate()
+    {
+        hurtOverlay.color = new Color(hurtOverlay.color.r, hurtOverlay.color.g, hurtOverlay.color.b, 0f);
     }
 
     public IEnumerator HealFlash()
@@ -143,7 +169,13 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator ActivateDeathScreen()
     {
+        GetComponent<PauseMenu>().escape.Disable();
+        
+        hurtOverlay.color = new Color(hurtOverlay.color.r, hurtOverlay.color.g, hurtOverlay.color.b, Mathf.Clamp(deathAlpha, 0, 1));
         yield return new WaitForSeconds(deathWaitPeriod);
+        hurtOverlay.color = new Color(hurtOverlay.color.r, hurtOverlay.color.g, hurtOverlay.color.b, 0);
+
+        GetComponent<PauseMenu>().Pause();
         deathOverlay.SetActive(true);
 
         yield return 0;

@@ -7,7 +7,9 @@ public class SphereMovement : MonoBehaviour
 
     Controls controls;
     private InputAction movement;
+    private InputAction stop;
     private float movementInput;
+    private float stopInput;
 
     [Header ("Movement Paramters")]
     [SerializeField] private float force;
@@ -17,10 +19,12 @@ public class SphereMovement : MonoBehaviour
     [SerializeField] private float wallSlidingSpeed;
     [SerializeField] private float jumpCooldown;
     [SerializeField] private float wallModifier;
+    [SerializeField] private float stopValue;
 
     private float jumpTimer;
     private bool isGrounded;
     private bool onWall;
+    private bool nonClimbable;
 
     private RaycastHit2D hitRight;
     private RaycastHit2D hitLeft;
@@ -45,17 +49,27 @@ public class SphereMovement : MonoBehaviour
 
         controls.Sphere.Jump.performed += DoJump;
         controls.Sphere.Jump.Enable();
+
+        stop = controls.Sphere.Stop;
+        stop.Enable();
+
     }
 
     private void OnDisable()
     {
         movement.Disable();
         controls.Sphere.Jump.Disable();
+        stop.Disable();
     }
 
     void Update()
     {
         movementInput = movement.ReadValue<float>();
+        stopInput = stop.ReadValue<float>();
+
+        if (stopInput > 0)
+            DoStop();
+
     }
 
     private void FixedUpdate()
@@ -69,6 +83,11 @@ public class SphereMovement : MonoBehaviour
             onWall = true;
         else
             onWall = false;
+
+        if ((hitLeft && hitLeft.collider.CompareTag("NonClimbableWall")) || (hitRight && hitRight.collider.CompareTag("NonClimbableWall")))
+            nonClimbable = true;
+        else
+            nonClimbable = false;
 
         jumpTimer += Time.fixedDeltaTime;
     }
@@ -97,11 +116,23 @@ public class SphereMovement : MonoBehaviour
                 if (hitRight) rb.AddForce(new Vector2(-0.75f*jumpForce, wallModifier * jumpForce), ForceMode2D.Impulse);
                 else if (hitLeft) rb.AddForce(new Vector2(0.75f*jumpForce, wallModifier * jumpForce), ForceMode2D.Impulse);
             }
+            else if (nonClimbable)
+            {
+                rb.AddForce(new Vector2(0, jumpForce / 10), ForceMode2D.Impulse);
+            }
             else
                 rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             
             
         }
+    }
+
+    private void DoStop()
+    {
+        if (!isGrounded)
+            return;
+        
+        rb.velocity = new Vector2(rb.velocity.x * stopValue, rb.velocity.y);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
