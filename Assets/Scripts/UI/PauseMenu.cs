@@ -1,31 +1,28 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
+
 
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuObject;
-    [SerializeField] private GameObject player;
+    [SerializeField] private Health player;
     [SerializeField] private CheckpointChecker checkpointHolder;
-    [SerializeField] private GameObject healthPickupHolder;
+    [SerializeField] private PickupRefresh healthPickupHolder;
     
-
     private Controls controls;
     public InputAction escape;
-    private bool paused;
-    private Animator[] playerAnimators;
-    private SphereMovement sphereMovement;
     private TeleportToTarget teleporter;
-    private HealthPickup[] healthPickups;
+
+    private DeathMenu deathMenu;
+    private UIManager uIManager;
 
     private void Awake()
     {
         controls = new Controls();
-        playerAnimators = player.GetComponentsInChildren<Animator>(true);
-        sphereMovement = player.GetComponentInChildren<SphereMovement>(true);
-        healthPickups = healthPickupHolder.GetComponentsInChildren<HealthPickup>(true);
+        
         teleporter = GetComponent<TeleportToTarget>();
+        deathMenu = GetComponent<DeathMenu>();
+        uIManager = GetComponent<UIManager>();
     }
 
     private void OnEnable()
@@ -38,83 +35,45 @@ public class PauseMenu : MonoBehaviour
     {
         if (escape.WasPressedThisFrame())
         {
-            if (paused)
+            if (uIManager.IsPaused())
                 UnpauseGame();
             else
                 PauseGame();
         }
     }
 
-    public void Pause()
-    {
-        paused = true;
-
-        foreach (Animator anim in playerAnimators)
-        {
-            anim.enabled = false;
-        }
-
-        sphereMovement.enabled = false;
-
-        Cursor.visible = true;
-        Time.timeScale = 0f;
-    }
-
-    public void Unpause()
-    {
-        paused = false;
-
-        foreach (Animator anim in playerAnimators)
-        {
-            anim.enabled = true;
-        }
-
-        sphereMovement.enabled = true;
-
-        Cursor.visible = false;
-        Time.timeScale = 1f;
-
-        EventSystem.current.SetSelectedGameObject(null);
-    }
-
-    public void PauseGame()
-    {
-        Pause();
-
-        pauseMenuObject.SetActive(true);
-    }
-
-    public void UnpauseGame()
-    {
-        Unpause();
-
-        pauseMenuObject.SetActive(false);
-    }
-
     public void Respawn()
     {
-        GetComponent<PauseMenu>().escape.Enable();
-        GetComponent<UIManager>().deathOverlay.SetActive(false);
-        player.GetComponent<Health>().RespawnActivators();
+        escape.Enable();
+        deathMenu.deathOverlay.SetActive(false);
+        player.RespawnActivators();
         LoadCheckpoint();
     }
 
     public void LoadCheckpoint()
     {
-        GetComponent<UIManager>().HurtOverlayDeactivate();
-        ReactivateHealthPickups();
+        uIManager.HurtOverlayDeactivate();
+        healthPickupHolder.ReactivateHealthPickups();
 
         teleporter.TeleportPlayer(checkpointHolder.TeleportPosition(), player.transform);
-        player.GetComponent<Health>().FreezeMovement();
-        player.GetComponent<Health>().SetCheckpointHealth();
+        player.FreezeMovement();
+        player.LoadCheckpointHealth();
         UnpauseGame();
     }
 
-    private void ReactivateHealthPickups()
+    public void PauseGame()
     {
-        foreach (HealthPickup pickup in healthPickups)
-        {
-            pickup.gameObject.SetActive(true);
-        }
+        uIManager.Pause();
+
+        if (pauseMenuObject.activeInHierarchy == false)
+            pauseMenuObject.SetActive(true);
+    }
+
+    public void UnpauseGame()
+    {
+        uIManager.Unpause();
+
+        if (pauseMenuObject.activeInHierarchy == true)
+            pauseMenuObject.SetActive(false);
     }
 }

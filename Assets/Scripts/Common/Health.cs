@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
     [SerializeField] private GameObject[] forms;
 
     [Header("Shake")]
-    [SerializeField] private CameraFollow cameraToShake;
+    [SerializeField] private CameraShaker cameraToShake;
     [SerializeField] private float shakeMagnitude;
 
     [Header("Invulnerability")]
@@ -72,7 +72,7 @@ public class Health : MonoBehaviour
         }
 
         StartCoroutine(cameraToShake.CameraShake(deathShakePeriod, 2 * shakeMagnitude, 1.001f));
-        StartCoroutine(uiManager.ActivateDeathScreen());
+        StartCoroutine(uiManager.GetComponent<DeathMenu>().ActivateDeathScreen());
 
         GetComponentInChildren<Rigidbody2D>().Sleep();
         anim.enabled = false;
@@ -113,7 +113,7 @@ public class Health : MonoBehaviour
         healthAtLastCheckpoint = currentHealth;
     }
 
-    public void SetCheckpointHealth()
+    public void LoadCheckpointHealth()
     {
         currentHealth = healthAtLastCheckpoint;
         uiManager.SetHealthValue(currentHealth / maximumHealth);

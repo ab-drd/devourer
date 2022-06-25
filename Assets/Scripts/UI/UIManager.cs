@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Transform transformationCooldownBar;
     [SerializeField] private Transformation player;
     [SerializeField] private Image transformationIconHolder;
-
+    
     [Header("Transformation bar colors")]
     [SerializeField] private Color fullColor;
     [SerializeField] private Color emptyColor;
@@ -28,26 +29,25 @@ public class UIManager : MonoBehaviour
     [SerializeField] private float healAlpha;
     [SerializeField] private float healSpeed;
 
-    [Header ("Death")]
-    [SerializeField] private float deathWaitPeriod;
-    [SerializeField] public GameObject deathOverlay;
-    [SerializeField] private float deathAlpha;
-
     [Header("Burst")]
     [SerializeField] private GameObject burstBar;
     [SerializeField] private GameObject burstBarHolder;
 
+    private bool paused;
     private int active;
     private Image transformationCooldownImage;
     private List<GameObject> playerForms;
     private List<Image> formIcons;
+    private Animator[] playerAnimators;
+    private SphereMovement sphereMovement;
 
     private void Awake()
     {
         Cursor.visible = false;
         transformationCooldownImage = transformationCooldownBar.GetComponentInChildren<Image>();
+        sphereMovement = player.GetComponentInChildren<SphereMovement>(true);
+        playerAnimators = player.GetComponentsInChildren<Animator>(true);
         SetImages();
-        deathOverlay.SetActive(false);
     }
 
     private void Start()
@@ -67,6 +67,11 @@ public class UIManager : MonoBehaviour
 
             formIcons[i].gameObject.SetActive(true);
         }
+    }
+    
+    public bool IsPaused()
+    {
+        return paused;
     }
 
     public void SetTransformationIconHolderSize()
@@ -167,17 +172,35 @@ public class UIManager : MonoBehaviour
         yield return 0;
     }
 
-    public IEnumerator ActivateDeathScreen()
+    public void Pause()
     {
-        GetComponent<PauseMenu>().escape.Disable();
-        
-        hurtOverlay.color = new Color(hurtOverlay.color.r, hurtOverlay.color.g, hurtOverlay.color.b, Mathf.Clamp(deathAlpha, 0, 1));
-        yield return new WaitForSeconds(deathWaitPeriod);
-        hurtOverlay.color = new Color(hurtOverlay.color.r, hurtOverlay.color.g, hurtOverlay.color.b, 0);
+        paused = true;
 
-        GetComponent<PauseMenu>().Pause();
-        deathOverlay.SetActive(true);
+        foreach (Animator anim in playerAnimators)
+        {
+            anim.enabled = false;
+        }
 
-        yield return 0;
+        sphereMovement.enabled = false;
+
+        Cursor.visible = true;
+        Time.timeScale = 0f;
+    }
+
+    public void Unpause()
+    {
+        paused = false;
+
+        foreach (Animator anim in playerAnimators)
+        {
+            anim.enabled = true;
+        }
+
+        sphereMovement.enabled = true;
+
+        Cursor.visible = false;
+        Time.timeScale = 1f;
+
+        EventSystem.current.SetSelectedGameObject(null);
     }
 }

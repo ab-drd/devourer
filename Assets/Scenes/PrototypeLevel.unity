@@ -667,6 +667,7 @@ GameObject:
   - component: {fileID: 69413649}
   - component: {fileID: 69413648}
   - component: {fileID: 69413647}
+  - component: {fileID: 69413652}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -786,6 +787,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &69413652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69413646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 503978d98bc87fb4a9bd32c214a869bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &80916290
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,7 +891,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2731130400455749824, guid: 87f448323b3b7ae4eae301dea5cc3f32, type: 3}
   m_PrefabInstance: {fileID: 2731130400536947814}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 327907678}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bda85e7200dc3314a9ee1734d445c49d, type: 3}
@@ -1765,6 +1778,7 @@ GameObject:
   - component: {fileID: 210143145}
   - component: {fileID: 210143146}
   - component: {fileID: 210143147}
+  - component: {fileID: 210143148}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -1884,9 +1898,6 @@ MonoBehaviour:
   healOverlay: {fileID: 1201474578}
   healAlpha: 0.05
   healSpeed: 0.005
-  deathWaitPeriod: 2
-  deathOverlay: {fileID: 2063292106}
-  deathAlpha: 0.1
   burstBar: {fileID: 1014332289}
   burstBarHolder: {fileID: 1120404741}
 --- !u!114 &210143146
@@ -1902,9 +1913,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuObject: {fileID: 271412482}
-  player: {fileID: 327907678}
+  player: {fileID: 327907679}
   checkpointHolder: {fileID: 1042790521}
-  healthPickupHolder: {fileID: 1690599714}
+  healthPickupHolder: {fileID: 1690599716}
   escape:
     m_Name: Escape
     m_Type: 0
@@ -1928,6 +1939,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleportPosition: {fileID: 0}
   player: {fileID: 0}
+--- !u!114 &210143148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210143140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fba53c5a4cb914997619d15dfa8d64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathWaitPeriod: 2
+  deathOverlay: {fileID: 2063292106}
+  deathAlpha: 0.3
+  hurtOverlay: {fileID: 1590761347}
 --- !u!1 &211409242
 GameObject:
   m_ObjectHideFlags: 0
@@ -3066,11 +3093,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88a7edcb92558d940abd668f9411aa74, type: 3}
---- !u!1 &327907678 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2731130400455749829, guid: 87f448323b3b7ae4eae301dea5cc3f32, type: 3}
+--- !u!114 &327907679 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2731130400455749826, guid: 87f448323b3b7ae4eae301dea5cc3f32, type: 3}
   m_PrefabInstance: {fileID: 2731130400536947814}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d09af2ce48bf994e997f85f870dc27b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &328125887
 GameObject:
   m_ObjectHideFlags: 0
@@ -10863,7 +10896,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4234184903871788132, guid: 804ab58c8b7fe84498f2ff3c7b1470a7, type: 3}
       propertyPath: m_Name
-      value: Respawn
+      value: RespawnAtLastCheckpoint
       objectReference: {fileID: 0}
     - target: {fileID: 4234184903871788138, guid: 804ab58c8b7fe84498f2ff3c7b1470a7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -10907,7 +10940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4234184903871788139, guid: 804ab58c8b7fe84498f2ff3c7b1470a7, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 205.5414
+      value: 340.9446
       objectReference: {fileID: 0}
     - target: {fileID: 4234184903871788139, guid: 804ab58c8b7fe84498f2ff3c7b1470a7, type: 3}
       propertyPath: m_SizeDelta.y
@@ -10975,7 +11008,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4234184904212904973, guid: 804ab58c8b7fe84498f2ff3c7b1470a7, type: 3}
       propertyPath: m_text
-      value: Respawn
+      value: Respawn at last checkpoint
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4234184903871788143, guid: 804ab58c8b7fe84498f2ff3c7b1470a7, type: 3}
@@ -20203,6 +20236,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1690599715}
+  - component: {fileID: 1690599716}
   m_Layer: 0
   m_Name: HealthPickupHolder
   m_TagString: Untagged
@@ -20233,6 +20267,18 @@ Transform:
   m_Father: {fileID: 227709848}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1690599716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690599714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3516ea7a2060bf74d9f21b4a99cc6151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1697057059
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23285,6 +23331,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2063292107}
+  - component: {fileID: 2063292108}
   m_Layer: 5
   m_Name: DeathScreenHolder
   m_TagString: Untagged
@@ -23315,6 +23362,18 @@ RectTransform:
   m_AnchoredPosition: {x: -0.000061035156, y: -0.0040893555}
   m_SizeDelta: {x: 0, y: 0.25}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2063292108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063292106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60294d36e60e685428d5011cd0a266a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2063358102 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 772229005088544937, guid: 88a7edcb92558d940abd668f9411aa74, type: 3}
@@ -24203,7 +24262,7 @@ PrefabInstance:
     - target: {fileID: 2731130400455749826, guid: 87f448323b3b7ae4eae301dea5cc3f32, type: 3}
       propertyPath: cameraToShake
       value: 
-      objectReference: {fileID: 69413647}
+      objectReference: {fileID: 69413652}
     - target: {fileID: 2731130400455749826, guid: 87f448323b3b7ae4eae301dea5cc3f32, type: 3}
       propertyPath: shakeDuration
       value: 2
