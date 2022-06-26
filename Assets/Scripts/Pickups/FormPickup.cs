@@ -9,7 +9,7 @@ public class FormPickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 8)
+        if (collision.CompareTag("Player"))
         {
             collision.gameObject.GetComponentInParent<Transformation>().SetFormCount(formNumber);
 

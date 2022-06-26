@@ -71,7 +71,7 @@ public class AnglerfishMovement : MonoBehaviour
         uiManager.SetBurstValue(dashTimer / dashCooldown);
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (isSwimming)
             Move();
@@ -79,7 +79,7 @@ public class AnglerfishMovement : MonoBehaviour
         dashTimer += Time.fixedDeltaTime;
     }
 
-    void Move()
+    private void Move()
     {
         Vector2 values = movement.ReadValue<Vector2>();
         float rotation_z = Mathf.Atan2(values.y, values.x) * Mathf.Rad2Deg;
@@ -138,7 +138,7 @@ public class AnglerfishMovement : MonoBehaviour
         rb.rotation = rotation_z;*/
     }
 
-    void Dash(InputAction.CallbackContext obj)
+    private void Dash(InputAction.CallbackContext obj)
     {
         if (isDashing) return;
 
@@ -149,7 +149,7 @@ public class AnglerfishMovement : MonoBehaviour
         }
     }
 
-    IEnumerator DashDuration()
+    private IEnumerator DashDuration()
     {
         isDashing = true;
         anim.SetBool("dashing", isDashing);

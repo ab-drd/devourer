@@ -17,8 +17,6 @@ public class CrusherTrap : MonoBehaviour
 
     private bool movingOut;
     private bool isWaiting;
-    private float startTime;
-    private float offsetTime;
     private Vector2 retractP;
     private Vector2 outP;
 
@@ -48,21 +46,15 @@ public class CrusherTrap : MonoBehaviour
     private void MoveTowards()
     {
         if (new Vector2(crusherHead.position.x, crusherHead.position.y) != outP)
-        {
             crusherHead.position = Vector2.MoveTowards(crusherHead.position, new Vector2(outP.x, outP.y), crushSpeed * Time.deltaTime);
-        }
         else
-        {
             movingOut = false;
-        }
     }
 
     private void MoveBack()
     {
         if (new Vector2(crusherHead.position.x, crusherHead.position.y) != retractP)
-        {
             crusherHead.position = Vector2.MoveTowards(crusherHead.position, new Vector2(retractP.x, retractP.y), crushSpeed * Time.deltaTime);
-        }
         else
         {
             movingOut = true;
@@ -75,5 +67,6 @@ public class CrusherTrap : MonoBehaviour
         isWaiting = true;
         yield return new WaitForSeconds(wait);
         isWaiting = false;
+        yield return null;
     }
 }

@@ -37,9 +37,7 @@ public class ShooterTrapHolder : MonoBehaviour
         for (int i = 0; i < harpoons.Length; i++)
         {
             if (!harpoons[i].activeInHierarchy)
-            {
                 return i;
-            }
         }
 
         return 0;

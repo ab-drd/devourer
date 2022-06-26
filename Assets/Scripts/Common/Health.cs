@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -24,12 +23,13 @@ public class Health : MonoBehaviour
     public float healthAtLastCheckpoint;
     private bool invulnerable;
 
-    private Animator anim;
+    private Animator anglerAnim;
+
     private void Awake()
     {
         currentHealth = maximumHealth;
         healthAtLastCheckpoint = maximumHealth;
-        anim = forms[1].GetComponentInChildren<Animator>();
+        anglerAnim = forms[1].GetComponentInChildren<Animator>();
     }
 
     public void TakeDamage(float _damage)
@@ -46,17 +46,17 @@ public class Health : MonoBehaviour
             Hurt();
         }
 
-        uiManager.SetHealthValue(currentHealth / maximumHealth);
+        SetUIHealth();
     }
 
     public void Heal(float _healAmount)
     {
         currentHealth = Mathf.Clamp(currentHealth + _healAmount, 0, maximumHealth);
-        uiManager.SetHealthValue(currentHealth / maximumHealth);
+        SetUIHealth();
         StartCoroutine(uiManager.HealFlash());
     }
 
-    public void Die()
+    private void Die()
     {
         if (forms[0].activeInHierarchy)
         {
@@ -66,7 +66,7 @@ public class Health : MonoBehaviour
 
         if (forms[1].activeInHierarchy)
         {
-            anim.SetBool("isDead", true);
+            anglerAnim.SetBool("isDead", true);
             GetComponentInChildren<AnglerfishMovement>().enabled = false;
             GetComponentInChildren<PolygonCollider2D>().enabled = false;
         }
@@ -75,13 +75,12 @@ public class Health : MonoBehaviour
         StartCoroutine(uiManager.GetComponent<DeathMenu>().ActivateDeathScreen());
 
         GetComponentInChildren<Rigidbody2D>().Sleep();
-        anim.enabled = false;
+        anglerAnim.enabled = false;
         GetComponent<Transformation>().enabled = false;
     }
 
-    public void Hurt()
+    private void Hurt()
     {
-        Debug.Log("Hurt!");
         StartCoroutine(cameraToShake.CameraShake(invulnerabilityPeriod / 4, shakeMagnitude, 1f));
         StartCoroutine(uiManager.HurtOverlayFade(invulnerabilityPeriod));
         StartCoroutine(Invulnerability());
@@ -92,20 +91,16 @@ public class Health : MonoBehaviour
         invulnerable = true;
 
         if (forms[1].activeInHierarchy)
-            anim.SetTrigger("hurt");
+            anglerAnim.SetTrigger("hurt");
 
         yield return new WaitForSeconds(invulnerabilityPeriod);
         invulnerable = false;
         yield return 0;
     }
 
-    public void FreezeMovement()
+    private void SetUIHealth()
     {
-        foreach (GameObject form in forms)
-        {
-            form.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            form.GetComponent<Rigidbody2D>().angularVelocity = 0f;
-        }
+        uiManager.SetHealthValue(currentHealth / maximumHealth);
     }
 
     public void UpdateCheckpointHealth()
@@ -116,7 +111,15 @@ public class Health : MonoBehaviour
     public void LoadCheckpointHealth()
     {
         currentHealth = healthAtLastCheckpoint;
-        uiManager.SetHealthValue(currentHealth / maximumHealth);
+        SetUIHealth();
+    }
+    public void FreezeMovement()
+    {
+        foreach (GameObject form in forms)
+        {
+            form.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            form.GetComponent<Rigidbody2D>().angularVelocity = 0f;
+        }
     }
 
     public void RespawnActivators()
@@ -129,13 +132,15 @@ public class Health : MonoBehaviour
 
         if (forms[1].activeInHierarchy)
         {
-            anim.SetBool("isDead", false);
+            anglerAnim.SetBool("isDead", false);
             GetComponentInChildren<AnglerfishMovement>().enabled = true;
             GetComponentInChildren<PolygonCollider2D>().enabled = true;
         }
 
         GetComponentInChildren<Rigidbody2D>().WakeUp();
-        anim.enabled = true;
+        anglerAnim.enabled = true;
         GetComponent<Transformation>().enabled = true;
     }
+
+    
 }

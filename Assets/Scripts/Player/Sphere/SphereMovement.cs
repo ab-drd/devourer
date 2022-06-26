@@ -3,14 +3,6 @@ using UnityEngine.InputSystem;
 
 public class SphereMovement : MonoBehaviour
 {
-    private Rigidbody2D rb;
-
-    Controls controls;
-    private InputAction movement;
-    private InputAction stop;
-    private float movementInput;
-    private float stopInput;
-
     [Header ("Movement Paramters")]
     [SerializeField] private float force;
     [SerializeField] private float jumpForce;
@@ -20,6 +12,14 @@ public class SphereMovement : MonoBehaviour
     [SerializeField] private float jumpCooldown;
     [SerializeField] private float wallModifier;
     [SerializeField] private float stopValue;
+
+    private Rigidbody2D rb;
+
+    Controls controls;
+    private InputAction movement;
+    private InputAction stop;
+    private float movementInput;
+    private float stopInput;
 
     private float jumpTimer;
     private bool isGrounded;
@@ -33,6 +33,7 @@ public class SphereMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         controls = new Controls();
+
         if (topYSpeed > 0)
             topYSpeed *= -1;
         if (wallSlidingSpeed > 0)
@@ -66,15 +67,13 @@ public class SphereMovement : MonoBehaviour
     {
         movementInput = movement.ReadValue<float>();
         stopInput = stop.ReadValue<float>();
-
-        if (stopInput > 0)
-            DoStop();
-
     }
 
     private void FixedUpdate()
     {
         AddForceAndLimitSpeed();
+        if (stopInput > 0)
+            DoStop();
 
         hitRight = Physics2D.Raycast(new Vector3(transform.position.x + 0.56f, transform.position.y, transform.position.z), Vector2.right, 0.01f);
         hitLeft = Physics2D.Raycast(new Vector3(transform.position.x - 0.56f, transform.position.y, transform.position.z), Vector2.left, 0.01f);
@@ -117,13 +116,9 @@ public class SphereMovement : MonoBehaviour
                 else if (hitLeft) rb.AddForce(new Vector2(0.75f*jumpForce, wallModifier * jumpForce), ForceMode2D.Impulse);
             }
             else if (nonClimbable)
-            {
                 rb.AddForce(new Vector2(0, jumpForce / 10), ForceMode2D.Impulse);
-            }
             else
                 rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-            
-            
         }
     }
 
